@@ -1,0 +1,134 @@
+-- =====================================================
+-- Project: Hotpoint_Appliances_Analytics
+-- Purpose: Analyze sales, revenue, inventory, and product performance
+-- =====================================================
+
+-- 1. Products table
+CREATE TABLE Products (
+    ProductID CHAR(8) PRIMARY KEY,
+    ProductName VARCHAR(100),
+    Brand VARCHAR(50),
+    Category VARCHAR(50),
+    UnitPrice DECIMAL(10,2),
+    StockQuantity INT
+);
+
+INSERT INTO Products (ProductID, ProductName, Brand, Category, UnitPrice, StockQuantity) VALUES
+('VAC9F042W', 'Von 4G+2E Cooker', 'Von', 'Cooker', 75499.00, 30),
+('VCF65313N', 'Von 3G+1E Cooker', 'Von', 'Cooker', 36500.00, 25),
+('VRT182NRK', 'Von 181L Fridge', 'Von', 'Refrigerator', 48499.00, 20),
+('VAF080DST', 'Von 8L Digital Air Fryer', 'Von', 'Small Appliance', 9499.00, 40),
+('VBP501NLB', 'Von 1.5L 2‑in‑1 Blender', 'Von', 'Blender', 3799.00, 50),
+
+('HRF250L00', 'Hisense 250L Fridge', 'Hisense', 'Refrigerator', 75000.00, 15),
+('HWM80TWT0', 'Hisense 8kg Twin Tub Washer', 'Hisense', 'Washing Machine', 55000.00, 20),
+('HAC12000B', 'Hisense 12000 BTU AC', 'Hisense', 'Air Conditioner', 95000.00, 10),
+
+('LGF300SS1', 'LG 300L Frost-Free Fridge', 'LG', 'Refrigerator', 82000.00, 18),
+('LWM95WDL1', 'LG 9.5kg Washer Dryer', 'LG', 'Washing Machine', 110000.00, 12),
+('LMW2503ST', 'LG 25L Microwave', 'LG', 'Microwave', 20000.00, 22),
+
+('SRT418LR', 'Samsung 418L French Door Fridge', 'Samsung', 'Refrigerator', 150000.00, 5),
+('SWA10T605', 'Samsung 10kg Top Loader Washer', 'Samsung', 'Washing Machine', 85000.00, 8),
+('SAMG45MF0', 'Samsung 45L Microwave', 'Samsung', 'Microwave', 25000.00, 15),
+
+('TO3265XS', 'B+DE Toaster Oven Air Fryer', 'Black+Decker', 'Toaster Oven', 35320.00, 35),
+('AF3550B5X', 'B+DE 3.5L 8‑in‑1 Air Fryer', 'Black+Decker', 'Air Fryer', 6839.00, 40),
+('BHFEA420', 'B+DE Cordless Vacuum Stick', 'Black+Decker', 'Vacuum', 18975.00, 30),
+('RC506B5XX', 'B+DE 6‑Cup Rice Cooker', 'Black+Decker', 'Cooker', 5021.00, 45),
+
+('SIMH7G70X', 'Simfer 70cm Built-in Gas Hob', 'Simfer', 'Hob', 22000.00, 10),
+('SEF1521BK', 'Simfer 152L Fridge', 'Simfer', 'Refrigerator', 42000.00, 12),
+('SKL17BNK', 'Simfer 1.7L Kettle', 'Simfer', 'Kettle', 4500.00, 20),
+
+('V11TORQ42', 'Dyson V11 Torque Vacuum', 'Dyson', 'Vacuum', 95000.00, 8),
+('SV12NCLS8', 'Dyson SV12 Nick’s Legacy Vacuum', 'Dyson', 'Vacuum', 90000.00, 7),
+('HP07PURE8', 'Dyson HP07 Pure Cool Air Purifier', 'Dyson', 'Air Purifier', 110000.00, 6),
+
+('AM07BLK12', 'Dyson AM07 Tower Fan', 'Dyson', 'Fan', 40000.00, 10),
+('VAMS20MGX', 'Von 20L Microwave', 'Von', 'Microwave', 10999.00, 20),
+('LGF300MJ5', 'LG 300L Inverter Fridge', 'LG', 'Refrigerator', 90000.00, 10),
+('HBL201150', 'Hisense 1.5L Blender', 'Hisense', 'Blender', 6000.00, 25),
+('RT38K503', 'Samsung 503L RT Fridge', 'Samsung', 'Refrigerator', 140000.00, 4),
+('TRO50B52', 'B+DE 28L Convection Oven', 'Black+Decker', 'Oven', 10526.00, 12),
+('VAMG21DGK', 'Von 21L Digital Microwave', 'Von', 'Microwave', 12000.00, 18),
+('VCF964241', 'Von 4G+2E Cooker 90cm', 'Von', 'Cooker', 95000.00, 10),
+('LHSM3001S1', 'LG Steam Iron', 'LG', 'Iron', 12000.00, 30),
+('HKT351200', 'Hisense 1.5L Kettle', 'Hisense', 'Kettle', 5000.00, 25),
+('DW80R4050U1', 'Samsung Dishwasher 8 Place', 'Samsung', 'Dishwasher', 60000.00, 8),
+('VWM13AHKP', 'Von 13kg Twin Tub Washer', 'Von', 'Washing Machine', 28999.00, 15),
+('VSHK12QRQ', 'Simfer Quartz Heater', 'Simfer', 'Heater', 8000.00, 20),
+('IR1020SDB', 'B+DE Steam Iron IR1020', 'Black+Decker', 'Iron', 4439.00, 35),
+('LMTC2035B1', 'LG 20L Oven', 'LG', 'Oven', 30000.00, 12),
+('HWR378DGZ', 'Hisense 38 In Tower Fan', 'Hisense', 'Fan', 9000.00, 14),
+('FRR1665QAF', 'Samsung 165L Fridge Freezer', 'Samsung', 'Refrigerator', 110000.00, 6),
+('TP07PUREUV', 'Dyson TP07 Purifier Cool', 'Dyson', 'Purifier', 100000.00, 5),
+('VART19DHS1', 'Von 138L Double Door Fridge', 'Von', 'Refrigerator', 34999.00, 8);
+
+-- 2. Sales table
+CREATE TABLE Sales (
+    SaleID INT PRIMARY KEY,
+    ProductID CHAR(8),
+    QuantitySold INT,
+    SaleDate DATE,
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
+);
+
+-- Sample sales data
+INSERT INTO Sales (SaleID, ProductID, QuantitySold, SaleDate) VALUES
+(1, 'VAC9F042W', 5, '2024-03-01'),
+(2, 'VRT182NRK', 3, '2024-03-02'),
+(3, 'HRF250L00', 2, '2024-03-03'),
+(4, 'LGF300SS1', 4, '2024-03-04'),
+(5, 'V11TORQ42', 1, '2024-03-05');
+
+-- =====================================================
+-- Analytics Queries
+-- =====================================================
+
+-- 1. Total revenue per product
+SELECT 
+    p.ProductName,
+    SUM(s.QuantitySold * p.UnitPrice) AS TotalRevenue
+FROM Sales s
+JOIN Products p ON s.ProductID = p.ProductID
+GROUP BY p.ProductName
+ORDER BY TotalRevenue DESC;
+
+-- 2. Remaining stock per product
+SELECT 
+    p.ProductName,
+    p.StockQuantity - COALESCE(SUM(s.QuantitySold), 0) AS RemainingStock
+FROM Products p
+LEFT JOIN Sales s ON p.ProductID = s.ProductID
+GROUP BY p.ProductName, p.StockQuantity
+ORDER BY RemainingStock ASC;
+
+-- 3. Monthly sales trend (revenue)
+SELECT 
+    YEAR(s.SaleDate) AS SaleYear,
+    MONTH(s.SaleDate) AS SaleMonth,
+    SUM(s.QuantitySold * p.UnitPrice) AS MonthlyRevenue
+FROM Sales s
+JOIN Products p ON s.ProductID = p.ProductID
+GROUP BY YEAR(s.SaleDate), MONTH(s.SaleDate)
+ORDER BY SaleYear, SaleMonth;
+
+-- 4. Revenue by brand
+SELECT 
+    p.Brand,
+    SUM(s.QuantitySold * p.UnitPrice) AS BrandRevenue
+FROM Sales s
+JOIN Products p ON s.ProductID = p.ProductID
+GROUP BY p.Brand
+ORDER BY BrandRevenue DESC;
+
+-- 5. Top 10 selling products (by quantity)
+SELECT 
+    p.ProductName,
+    SUM(s.QuantitySold) AS UnitsSold
+FROM Sales s
+JOIN Products p ON s.ProductID = p.ProductID
+GROUP BY p.ProductName
+ORDER BY UnitsSold DESC
+LIMIT 10;
