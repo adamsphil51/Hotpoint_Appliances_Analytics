@@ -1,7 +1,5 @@
--- =====================================================
 -- Project: Hotpoint_Appliances_Analytics
 -- Purpose: Analyze sales, revenue, inventory, and product performance
--- =====================================================
 
 -- 1. Products table
 CREATE TABLE Products (
@@ -74,7 +72,6 @@ CREATE TABLE Sales (
     FOREIGN KEY (ProductID) REFERENCES Products(ProductID)
 );
 
--- Sample sales data
 INSERT INTO Sales (SaleID, ProductID, QuantitySold, SaleDate) VALUES
 (1, 'VAC9F042W', 5, '2024-03-01'),
 (2, 'VRT182NRK', 3, '2024-03-02'),
